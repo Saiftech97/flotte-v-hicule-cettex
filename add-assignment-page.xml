@@ -1,0 +1,24 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Nouvelle affectation" class="bg-blue-600 text-white">
+        <NavigationButton text="Retour" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="Véhicule" class="text-gray-700 font-medium mb-1" />
+            <ListPicker items="{{ availableVehicles }}" selectedIndex="{{ selectedVehicleIndex }}" 
+                       class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Conducteur" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newAssignment.driverName }}" hint="Nom du conducteur" 
+                      class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Motif" class="text-gray-700 font-medium mb-1" />
+            <TextView text="{{ newAssignment.purpose }}" hint="Motif de l'affectation" 
+                     class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Button text="Affecter le véhicule" tap="{{ onSaveAssignment }}" 
+                    class="bg-blue-600 text-white p-3 rounded-lg" />
+        </StackLayout>
+    </ScrollView>
+</Page>

@@ -1,0 +1,52 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Télématique Véhicule" class="bg-blue-600 text-white">
+        <NavigationButton text="Retour" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Carte -->
+            <ContentView height="200" class="mb-4 rounded-lg">
+                <WebView src="{{ mapUrl }}" />
+            </ContentView>
+
+            <!-- Données en temps réel -->
+            <GridLayout rows="auto, auto, auto" columns="*, *" class="bg-white rounded-lg p-4 mb-4">
+                <Label row="0" col="0" text="Vitesse" class="text-gray-600" />
+                <Label row="0" col="1" text="{{ telemetry.location.speed + ' km/h' }}" class="text-right font-bold" />
+                
+                <Label row="1" col="0" text="Régime moteur" class="text-gray-600" />
+                <Label row="1" col="1" text="{{ telemetry.engineData.rpm + ' tr/min' }}" class="text-right font-bold" />
+                
+                <Label row="2" col="0" text="Niveau carburant" class="text-gray-600" />
+                <Label row="2" col="1" text="{{ telemetry.engineData.fuelLevel + '%' }}" class="text-right font-bold" />
+            </GridLayout>
+
+            <!-- Diagnostics -->
+            <StackLayout class="bg-white rounded-lg p-4">
+                <Label text="Diagnostics" class="text-lg font-bold mb-2" />
+                
+                <GridLayout rows="auto, auto, auto" columns="*, *">
+                    <Label row="0" col="0" text="Kilométrage" class="text-gray-600" />
+                    <Label row="0" col="1" text="{{ telemetry.diagnostics.odometer + ' km' }}" class="text-right" />
+                    
+                    <Label row="1" col="0" text="Tension batterie" class="text-gray-600" />
+                    <Label row="1" col="1" text="{{ telemetry.diagnostics.batteryVoltage + ' V' }}" class="text-right" />
+                    
+                    <Label row="2" col="0" text="Heures moteur" class="text-gray-600" />
+                    <Label row="2" col="1" text="{{ telemetry.diagnostics.engineHours + ' h' }}" class="text-right" />
+                </GridLayout>
+
+                <!-- Codes d'erreur -->
+                <StackLayout visibility="{{ telemetry.diagnostics.dtcCodes.length > 0 ? 'visible' : 'collapsed' }}" class="mt-4">
+                    <Label text="Codes d'erreur" class="font-bold text-red-600" />
+                    <ListView items="{{ telemetry.diagnostics.dtcCodes }}" height="100">
+                        <ListView.itemTemplate>
+                            <Label text="{{ $value }}" class="text-red-600 p-1" />
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

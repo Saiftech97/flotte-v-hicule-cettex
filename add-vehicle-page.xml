@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Ajouter un véhicule" class="bg-blue-600 text-white">
+        <NavigationButton text="Retour" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="Marque" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newVehicle.brand }}" hint="Ex: Renault" class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Modèle" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newVehicle.model }}" hint="Ex: Clio" class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Année" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newVehicle.year }}" hint="Ex: 2023" keyboardType="number" class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Immatriculation" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newVehicle.registration }}" hint="Ex: AB-123-CD" class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Label text="Kilométrage initial" class="text-gray-700 font-medium mb-1" />
+            <TextField text="{{ newVehicle.mileage }}" hint="Ex: 0" keyboardType="number" class="mb-4 p-3 bg-white rounded border border-gray-300" />
+            
+            <Button text="Enregistrer" tap="{{ onSaveVehicle }}" class="bg-blue-600 text-white p-3 rounded-lg" />
+        </StackLayout>
+    </ScrollView>
+</Page>
