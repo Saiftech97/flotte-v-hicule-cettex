@@ -1,0 +1,55 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Gestion Flotte Auto" class="bg-blue-600 text-white">
+        <ActionItem tap="{{ onAddTap }}" ios.position="right" android.position="actionBar">
+            <Label text="+" class="text-2xl text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+    
+    <TabView selectedIndex="{{ selectedTabIndex }}" class="bg-gray-100">
+        <!-- Onglet Véhicules -->
+        <TabViewItem title="Véhicules">
+            <GridLayout rows="auto, *">
+                <StackLayout row="0" class="p-4 bg-white border-b border-gray-200">
+                    <GridLayout columns="*, *, *" class="text-center">
+                        <Label col="0" text="{{ availableCount }}" class="text-lg font-bold text-green-600" />
+                        <Label col="1" text="{{ inUseCount }}" class="text-lg font-bold text-blue-600" />
+                        <Label col="2" text="{{ maintenanceCount }}" class="text-lg font-bold text-orange-600" />
+                        
+                        <Label col="0" text="Disponible" class="text-sm text-gray-600" />
+                        <Label col="1" text="En Service" class="text-sm text-gray-600" />
+                        <Label col="2" text="Maintenance" class="text-sm text-gray-600" />
+                    </GridLayout>
+                </StackLayout>
+
+                <ListView row="1" items="{{ vehicles }}" itemTap="{{ onVehicleTap }}" class="list-group">
+                    <ListView.itemTemplate>
+                        <GridLayout columns="*, auto, auto" class="p-4 bg-white border-b border-gray-200">
+                            <StackLayout col="0">
+                                <Label text="{{ brand + ' ' + model }}" class="text-lg font-semibold" />
+                                <Label text="{{ 'Immat: ' + registration }}" class="text-gray-600" />
+                                <Label text="{{ mileage + ' km' }}" class="text-gray-600" />
+                            </StackLayout>
+                            <Label col="1" 
+                                   text="{{ status }}" 
+                                   class="{{ status === 'available' ? 'text-green-600' : status === 'in-use' ? 'text-blue-600' : 'text-orange-600' }}"
+                                   verticalAlignment="center" />
+                            <Button col="2" 
+                                   text="📍" 
+                                   tap="{{ $parent.onTrackVehicle }}"
+                                   class="text-2xl"
+                                   verticalAlignment="center" />
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </GridLayout>
+        </TabViewItem>
+
+        <!-- Autres onglets inchangés -->
+        <TabViewItem title="Affectations">
+            <!-- ... -->
+        </TabViewItem>
+        <TabViewItem title="Maintenance">
+            <!-- ... -->
+        </TabViewItem>
+    </TabView>
+</Page>
